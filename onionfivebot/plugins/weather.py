@@ -41,7 +41,7 @@ def get_weatherinfo():
     return inform
 
 
-@sched.scheduled_job('cron', hour='8, 12, 18')
+@sched.scheduled_job('cron', hour='9-18/3')
 def notify_weather_info():
     slack_client = getattr(bot, "_client", None)
     channel_id = slack_client.find_channel_by_name('general')
