@@ -37,11 +37,11 @@ def get_weatherinfo():
     now = datetime.datetime.utcfromtimestamp(weather.get('dt')) + datetime.timedelta(hours=9)
     nowtime = now.strftime('%Y년 %m월 %d일 %H시 %M분')
 
-    inform = '`{0}` 서울 기상상황 알려드립니다.\n기온 `{1:0.2f}도``\n습도 `{2}%``\n구름양 `{3}%`\n풍속 `{4}m/s`\n강우량 `{5}`\n강설량 `{6}`'.format(nowtime, temp, humidity, clouds, wind_speed, rain_fall, snow_fall)
+    inform = '`{0}` 서울 기상상황 알려드립니다.\n>>>기온 `{1:0.2f}도`\n습도 `{2}%`\n구름양 `{3}%`\n풍속 `{4}m/s`\n강우량 `{5}`\n강설량 `{6}`'.format(nowtime, temp, humidity, clouds, wind_speed, rain_fall, snow_fall)
     return inform
 
 
-@sched.scheduled_job('cron', hour=9, minute=30)
+@sched.scheduled_job('cron', hour='8, 12, 18')
 def notify_weather_info():
     slack_client = getattr(bot, "_client", None)
     channel_id = slack_client.find_channel_by_name('general')
